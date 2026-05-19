@@ -1,0 +1,73 @@
+from client.search import Search
+from client.news import News
+from client.fundamentals import Fundamentals, StatementData, DailyData
+
+TIINGO_TOKEN = "a2b70640dcb7265f5bc4c7653f52f4c9a6516b6f"
+SEARCH_ENDPOINT = "https://api.tiingo.com/tiingo/utilities/search"
+NEWS_ENDPOINT = "https://api.tiingo.com/tiingo/news"
+FUND_ENDPOINT = "https://api.tiingo.com/tiingo/fundamentals/definitions"
+STATEMENT_ENDPOINT = "https://api.tiingo.com/tiingo/fundamentals/{ticker}/statements"
+DAILY_FUND_ENDPOINT = "https://api.tiingo.com/tiingo/fundamentals/{ticker}/daily"
+
+HEADERS = {
+    'Content-Type': 'application/json'
+}
+
+def testSearchEndpt():
+    params = {}
+    search_req = Search(endpoint = SEARCH_ENDPOINT,
+                        headers = HEADERS,
+                        params = params)
+    search_req.setTicker("AAPL")
+    search_req.setExactMatch(False)
+    search_req.setToken(TIINGO_TOKEN)
+    search_req.setLimit(5)
+    resp = search_req.getResponse()
+    print(resp.json())
+
+def testNewsEndpt():
+    params = {}
+    news_req = News( endpoint = NEWS_ENDPOINT,
+                     headers = HEADERS,
+                     params = params)
+    news_req.setToken(TIINGO_TOKEN)
+    news_req.setSources(['bloomberg.com'])
+    news_req.setLimit(5)
+    resp = news_req.getResponse()
+    print(resp.json())
+
+def testFundEndpt():
+    params = {}
+    fund_req = Fundamentals(endpoint = FUND_ENDPOINT,
+                     headers = HEADERS,
+                     params = params)
+    fund_req.setToken(TIINGO_TOKEN)
+    fund_req.setTickers(["KO"])
+    resp = fund_req.getResponse()
+    print(resp.json())
+
+def testStatementEndpt():
+    params = {}
+    stat_req = StatementData(endpt = STATEMENT_ENDPOINT,
+                             headers = HEADERS,
+                             params = params)
+    stat_req.setTicker("msft")
+    stat_req.setToken(TIINGO_TOKEN)
+    resp = stat_req.getResponse()
+    print(resp.json())
+
+def testDailyFundEndpt():
+    params = {}
+    daily_fund_req = DailyData(endpt = DAILY_FUND_ENDPOINT,
+                             headers = HEADERS,
+                             params = params)
+    daily_fund_req.setTicker("AAPL")
+    daily_fund_req.setToken(TIINGO_TOKEN)
+    daily_fund_req.setStartDate("2026-05-15")
+    resp = daily_fund_req.getResponse()
+    print(resp.json())
+
+def main():
+    testDailyFundEndpt()
+
+main()
