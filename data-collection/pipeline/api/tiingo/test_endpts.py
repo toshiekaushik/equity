@@ -1,13 +1,9 @@
 from client.search import Search
 from client.news import News
 from client.fundamentals import Fundamentals, StatementData, DailyData
+from client.endpoints import TiingoEndpoints as ENDPTS
 
 TIINGO_TOKEN = "a2b70640dcb7265f5bc4c7653f52f4c9a6516b6f"
-SEARCH_ENDPOINT = "https://api.tiingo.com/tiingo/utilities/search"
-NEWS_ENDPOINT = "https://api.tiingo.com/tiingo/news"
-FUND_ENDPOINT = "https://api.tiingo.com/tiingo/fundamentals/definitions"
-STATEMENT_ENDPOINT = "https://api.tiingo.com/tiingo/fundamentals/{ticker}/statements"
-DAILY_FUND_ENDPOINT = "https://api.tiingo.com/tiingo/fundamentals/{ticker}/daily"
 
 HEADERS = {
     'Content-Type': 'application/json'
@@ -15,7 +11,7 @@ HEADERS = {
 
 def testSearchEndpt():
     params = {}
-    search_req = Search(endpoint = SEARCH_ENDPOINT,
+    search_req = Search(endpoint = ENDPTS.SEARCH,
                         headers = HEADERS,
                         params = params)
     search_req.setTicker("AAPL")
@@ -27,7 +23,7 @@ def testSearchEndpt():
 
 def testNewsEndpt():
     params = {}
-    news_req = News( endpoint = NEWS_ENDPOINT,
+    news_req = News( endpoint = ENDPTS.NEWS,
                      headers = HEADERS,
                      params = params)
     news_req.setToken(TIINGO_TOKEN)
@@ -38,7 +34,7 @@ def testNewsEndpt():
 
 def testFundEndpt():
     params = {}
-    fund_req = Fundamentals(endpoint = FUND_ENDPOINT,
+    fund_req = Fundamentals(endpoint = ENDPTS.FUNDAMENTAL_DEFINITION,
                      headers = HEADERS,
                      params = params)
     fund_req.setToken(TIINGO_TOKEN)
@@ -48,7 +44,7 @@ def testFundEndpt():
 
 def testStatementEndpt():
     params = {}
-    stat_req = StatementData(endpt = STATEMENT_ENDPOINT,
+    stat_req = StatementData(endpt = ENDPTS.FUNDAMENTAL_STATEMENT,
                              headers = HEADERS,
                              params = params)
     stat_req.setTicker("msft")
@@ -58,7 +54,7 @@ def testStatementEndpt():
 
 def testDailyFundEndpt():
     params = {}
-    daily_fund_req = DailyData(endpt = DAILY_FUND_ENDPOINT,
+    daily_fund_req = DailyData(endpt = ENDPTS.DAILY_FUNDAMENTAL,
                              headers = HEADERS,
                              params = params)
     daily_fund_req.setTicker("AAPL")
