@@ -1,4 +1,4 @@
-from .client import TiingoClient
+from .tiingoClient import TiingoClient
 
 class Fundamentals(TiingoClient):
     def __init__(self, endpoint: str, headers: dict, params: dict):

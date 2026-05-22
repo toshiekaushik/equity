@@ -1,7 +1,7 @@
-from client.search import Search
-from client.news import News
-from client.fundamentals import Fundamentals, StatementData, DailyData
-from client.endpoints import TiingoEndpoints as ENDPTS
+from api.search import Search
+from api.news import News
+from api.fundamentals import Fundamentals, StatementData, DailyData
+from api.endpoints import TiingoEndpoints as ENDPTS
 
 TIINGO_TOKEN = "a2b70640dcb7265f5bc4c7653f52f4c9a6516b6f"
 

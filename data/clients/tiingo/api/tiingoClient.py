@@ -3,7 +3,7 @@ import requests
 from requests import Response
 
 class TiingoClient:
-    def __init__(self, endpoint: str, headers: dict, params: dict):
+    def __init__(self, endpoint = "", headers = {}, params = {}):
         self.endpoint = endpoint
         self.headers = headers
         self.params = params
