@@ -1,8 +1,5 @@
-from multitasking import Config
-
 from data.collector.accumulators import Accumulate
 from data.collector.accumulators.ClassRegistry import CLASS_REGISTRY
-
 
 class CollectorStage:
     def __init__(self, config: list[dict]):
