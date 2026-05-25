@@ -1,20 +1,21 @@
-from data.collector.dal.models import BaseModel
+from data.collector.dal.models import Stock
 import datetime
 
-class DailyReturns(BaseModel):
-    def __init__(self, id,
+class DailyReturns(Stock):
+    def __init__(self, ticker: str,
                  date: datetime,
                  open: float,
                  high: float,
                  low: float,
                  close: float,
                  volume: int):
-        super.__init__(id)
-        self.date = date
-        self.open = open
-        self.high = high
-        self.low = low
-        self.close = close
-        self.volume = volume
+        super.__init__(ticker,
+                       date,
+                       open,
+                       high,
+                       low,
+                       close,
+                       volume)
+
 
 
