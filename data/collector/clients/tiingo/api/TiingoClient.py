@@ -23,6 +23,7 @@ class TiingoClient:
 
     def getResponse(self) -> Response:
         print(self.params)
+        print("endpoint: ", self.endpoint)
         return requests.get(
             url = self.endpoint,
             params = self.params,

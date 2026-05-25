@@ -3,7 +3,7 @@ from data.collector.clients.tiingo.api.TiingoClient import TiingoClient
 
 class EOD(TiingoClient):
     def __init__(self, endpt: str, headers: dict, params: dict):
-        super.__init__(endpt, headers, params)
+        super().__init__(endpt, headers, params)
 
     def setTicker(self, ticker: str) -> None:
         self.setEndpoint(self.endpoint.format(ticker=ticker))

@@ -15,8 +15,8 @@ class PGConnection:
         self.user = user
         self.password = password
         self.port = port
-        self.conn = self.create_conn()
-        self.cursor = self.conn.cursor()
+        self._conn = self.create_conn()
+        self._cursor = self.conn.cursor()
 
     def create_conn(self) -> Connection:
         return psycopg.connect(
@@ -28,13 +28,23 @@ class PGConnection:
         )
 
     def close(self):
-        self.conn.close()
-        self.cursor.close()
+        self._conn.close()
+        self._cursor.close()
 
     @property
     def conn(self) -> Connection:
-        return self.conn
+        return self._conn
+
+    # @conn.setter
+    # def conn(self):
+    #     self.conn = psycopg.connect(
+    #         host = self.host,
+    #         dbname = self.dbname,
+    #         user = self.user,
+    #         password = self.password,
+    #         port = self.port
+    #     )
 
     @property
     def cursor(self) -> Cursor[Any]:
-        return self.cursor
+        return self._cursor
