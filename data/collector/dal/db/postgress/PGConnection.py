@@ -27,6 +27,10 @@ class PGConnection:
             port = self.port
         )
 
+    def close(self):
+        self.conn.close()
+        self.cursor.close()
+
     @property
     def conn(self) -> Connection:
         return self.conn

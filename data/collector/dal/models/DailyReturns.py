@@ -42,5 +42,5 @@ class DailyReturns(Stock):
         return self.close
 
     @property
-    def volumne(self) -> int:
+    def volume(self) -> int:
         return self.volume

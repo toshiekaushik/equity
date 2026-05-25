@@ -11,3 +11,5 @@ class DailyReturnsRepo():
     def delete_stock_entries(self, startDate: datetime, endDate: datetime, ticker: str) -> None:
         pass
 
+    def read_csv(self, path: str):
+        pass
