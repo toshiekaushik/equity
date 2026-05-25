@@ -2,7 +2,12 @@ from ..models.DailyReturns import DailyReturns
 import datetime
 
 class DailyReturnsRepo():
-    def add_stock(self, returns: DailyReturns):
+    def add_returns(self, returns: DailyReturns):
         pass
 
-    # def get_stock(self, date: datetime, ticker: str) -> DailyReturns:
+    def get_returns(self, startDate: datetime, endDate: datetime, ticker: str) -> DailyReturns:
+        pass
+
+    def delete_stock_entries(self, startDate: datetime, endDate: datetime, ticker: str) -> None:
+        pass
+
