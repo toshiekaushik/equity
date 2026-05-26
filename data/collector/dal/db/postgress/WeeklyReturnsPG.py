@@ -3,9 +3,10 @@ from pandas import DataFrame
 from sqlalchemy import create_engine
 
 from data.collector.dal.db.postgress.PGConnection import PGConnection
-from data.collector.dal.interfaces.DailyReturnsRepo import DailyReturnsRepo
+from data.collector.dal.interfaces.WeeklyReturnsRepo import WeeklyReturnsRepo
 
-class DailyReturnsPG(DailyReturnsRepo):
+
+class WeeklyReturnsPG(WeeklyReturnsRepo):
     def __init__(self):
         self.pgdb = PGConnection(
             host = "localhost",

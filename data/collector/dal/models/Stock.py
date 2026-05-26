@@ -1,4 +1,8 @@
 
 class Stock:
     def __init__(self, ticker: str):
-        self.ticker = ticker
+        self._ticker = ticker
+
+    @property
+    def ticker(self) -> str:
+        return self._ticker

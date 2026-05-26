@@ -1,5 +1,7 @@
-from data.collector.accumulators.DailyReturnsAcc import DailyReturns
+from data.collector.accumulators.DailyReturnsAcc import DailyReturnsAcc
+from data.collector.accumulators.WeeklyReturnsAcc import WeeklyReturnsAcc
 
 CLASS_REGISTRY = {
-    "DAILY_RETURNS": DailyReturns
+    "DAILY_RETURNS": DailyReturnsAcc,
+    "WEEKLY_RETURNS": WeeklyReturnsAcc
 }

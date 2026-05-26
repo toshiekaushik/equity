@@ -1,5 +1,6 @@
 from data.collector.accumulators.DailyReturnsAcc import DailyReturnsAcc
+from data.collector.accumulators.WeeklyReturnsAcc import WeeklyReturnsAcc
 
-acc = DailyReturnsAcc(tickers = ["AAPL", "GOOG", "AMZN"])
+acc = WeeklyReturnsAcc(tickers = ["AAPL", "GOOG", "AMZN"])
 
 acc.execute()

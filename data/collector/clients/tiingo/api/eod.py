@@ -18,7 +18,7 @@ class EOD(TiingoClient):
 
     # TODO: Need to set restrict freq to only ("daily", "weekly", "monthly", "annualy")
     def setFreq(self, freq: str) -> None:
-        self.parans["resampleFreq"] = freq
+        self.params["resampleFreq"] = freq
 
     # TODO: Enforce date format
     def setStartDate(self, startDate: str) -> None:

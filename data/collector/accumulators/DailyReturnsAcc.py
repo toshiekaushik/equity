@@ -5,10 +5,12 @@ from data.collector.clients.tiingo.api.eod import EOD
 from data.collector.clients.tiingo.api.endpoints import TiingoEndpoints
 import pandas as pd
 import os
-
+from dotenv import load_dotenv
 from data.collector.dal.db.postgress.DailyReturnsPG import DailyReturnsPG
 
-TIINGO_TOKEN = "a2b70640dcb7265f5bc4c7653f52f4c9a6516b6f"
+load_dotenv()
+
+TIINGO_TOKEN = os.getenv('TIINGO_TOKEN')
 HEADERS = {
     'Content-Type': 'application/json'
 }
@@ -28,7 +30,6 @@ class DailyReturnsAcc(Accumulate):
             df["ticker"] = ticker
             dfs.append(df)
         new_df = pd.concat(dfs, ignore_index = True)
-        print(new_df.dtypes)
         self.daily_returns_db.read_df(new_df, "daily_returns")
         self.daily_returns_db.close_connection()
 

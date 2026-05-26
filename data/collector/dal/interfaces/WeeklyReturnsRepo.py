@@ -1,13 +1,13 @@
 from pandas import DataFrame
 
-from ..models.DailyReturns import DailyReturns
+from ..models.WeeklyReturns import WeeklyReturns
 import datetime
 
-class DailyReturnsRepo():
-    def add_returns(self, returns: DailyReturns):
+class WeeklyReturnsRepo():
+    def add_returns(self, returns: WeeklyReturns):
         pass
 
-    def get_returns(self, startDate: datetime, endDate: datetime, ticker: str) -> DailyReturns:
+    def get_returns(self, startDate: datetime, endDate: datetime, ticker: str) -> WeeklyReturns:
         pass
 
     def delete_stock_entries(self, startDate: datetime, endDate: datetime, ticker: str) -> None:
