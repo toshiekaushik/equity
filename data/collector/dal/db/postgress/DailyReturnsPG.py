@@ -1,7 +1,7 @@
 import os
 
 import pandas as pd
-from pandas.core.interchange.dataframe_protocol import DataFrame
+from pandas import DataFrame
 from sqlalchemy import create_engine
 
 from data.collector.dal.db.postgress.PGConnection import PGConnection

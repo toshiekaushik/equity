@@ -1,7 +1,5 @@
 from io import StringIO
 
-from pandas.io.sas.sas_constants import dataset_offset
-
 from data.collector.accumulators.Accumulate import Accumulate
 from data.collector.clients.tiingo.api.eod import EOD
 from data.collector.clients.tiingo.api.endpoints import TiingoEndpoints
@@ -22,13 +20,15 @@ class DailyReturnsAcc(Accumulate):
         self.daily_returns_db = DailyReturnsPG()
 
     def execute(self) -> None:
-        for ticker in self.tickers:
+        dfs = []
+        for idx, ticker in enumerate(self.tickers):
             daily_returns_req = self.buildRequest(ticker)
             resp = daily_returns_req.getResponse()
             df = pd.read_csv(StringIO(resp.text))
-            df.to_csv("daily_returns.csv", mode = 'a', index = False)
-        new_df = pd.read_csv("daily_returns.csv")
-        os.remove("daily_returns.csv")
+            df["ticker"] = ticker
+            dfs.append(df)
+        new_df = pd.concat(dfs, ignore_index = True)
+        print(new_df.dtypes)
         self.daily_returns_db.read_df(new_df, "daily_returns")
         self.daily_returns_db.close_connection()
 
