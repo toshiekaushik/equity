@@ -12,5 +12,5 @@ HEADERS = {
 }
 
 class FundamentalAcc(Accumulate):
-
-    def __init__(self):
+    def __init__(self, tickers: list[str]):
+        self.tickers = tickers

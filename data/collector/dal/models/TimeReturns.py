@@ -1,33 +1,40 @@
 import datetime
 
 class TimeReturns:
-    def __init__(self, date: datetime,
+    def __init__(self, ticker: str,
+                 date: datetime,
                  open: float,
                  high: float,
                  low: float,
-                 close: float):
-        self.date = date
-        self.open = open
-        self.high = high
-        self.low = low
-        self.close = close
+                 close: float,
+                 volume: int):
+        self._date = date
+        self._open = open
+        self._high = high
+        self._low = low
+        self._close = close
+        self._volume = volume
 
     @property
     def date(self) -> datetime:
-        return self.date
+        return self._date
 
     @property
     def open(self) -> float:
-        return self.open
+        return self._open
 
     @property
     def high(self) -> float:
-        return self.high
+        return self._high
 
     @property
     def low(self) -> float:
-        return self.low
+        return self._low
 
     @property
     def close(self) -> float:
-        return self.close
+        return self._close
+
+    @property
+    def volume(self) -> int:
+        return self._volume
