@@ -7,8 +7,7 @@ import pandas as pd
 from data.collector.accumulators.Accumulate import Accumulate
 from data.collector.clients.tiingo.api.endpoints import TiingoEndpoints
 from data.collector.clients.tiingo.api.eod import EOD
-from data.collector.dal.db.postgress.WeeklyReturnsPG import WeeklyReturnsPG
-
+from data.collector.dal.db.postgress.TimeReturnsPG import TimeReturnsPG
 load_dotenv()
 
 API_KEY = os.getenv("TIINGO_TOKEN")
@@ -20,7 +19,7 @@ class WeeklyReturnsAcc(Accumulate):
 
     def __init__(self, tickers: list[str]):
         self.tickers = tickers
-        self.weekly_returns_db = WeeklyReturnsPG()
+        self.time_returns_db = TimeReturnsPG()
 
     def execute(self) -> None:
         dfs = []
@@ -31,8 +30,8 @@ class WeeklyReturnsAcc(Accumulate):
             df["ticker"] = ticker
             dfs.append(df)
         new_df = pd.concat(dfs, ignore_index = True)
-        self.weekly_returns_db.read_df(new_df, "weekly_returns")
-        self.weekly_returns_db.close_connection()
+        self.time_returns_db.read_df(new_df, "weekly_returns")
+        self.time_returns_db.close_connection()
 
     def buildRequest(self, ticker: str) -> EOD:
         weekly_returns = EOD(TiingoEndpoints.END_OF_DAY, HEADERS, {})
