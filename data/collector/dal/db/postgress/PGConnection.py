@@ -1,8 +1,9 @@
+import os
 from typing import Any
 
 import psycopg
 from psycopg import Connection, Cursor
-
+from sqlalchemy import create_engine
 
 class PGConnection:
     def __init__(self, host: str,
@@ -30,6 +31,9 @@ class PGConnection:
     def close(self):
         self._conn.close()
         self._cursor.close()
+
+    def getEngine(self):
+        return create_engine(os.getenv("PG_ENGINE"))
 
     @property
     def conn(self) -> Connection:

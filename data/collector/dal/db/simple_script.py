@@ -1,1 +1,0 @@
-# This is a simple script to handle grabbing data from TIINGO

@@ -1,3 +1,5 @@
+import os
+
 import pandas as pd
 from pandas import DataFrame
 from sqlalchemy import create_engine
@@ -58,14 +60,12 @@ class TimeReturnsPG(TimeReturnsRepo):
         conn.commit()
 
     def read_df(self, data: DataFrame, table_name: str):
-        engine = create_engine(
-            "postgresql+psycopg://postgres:password@localhost:5432/equity"
-        )
+        engine = self.pgdb.getEngine()
 
         data.to_sql(
             table_name,
-            con=engine,
-            if_exists="replace",
+            con = engine,
+            if_exists = "replace",
             index=False
         )
 

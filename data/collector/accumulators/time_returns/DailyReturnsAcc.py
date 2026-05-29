@@ -6,6 +6,7 @@ from data.collector.clients.tiingo.api.endpoints import TiingoEndpoints
 import pandas as pd
 import os
 from dotenv import load_dotenv
+from sqlalchemy import create_engine
 from data.collector.dal.db.postgress.TimeReturnsPG import TimeReturnsPG
 
 load_dotenv()
