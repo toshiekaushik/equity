@@ -69,6 +69,17 @@ class TimeReturnsPG(TimeReturnsRepo):
             index=False
         )
 
+    def execute_query(self, query: str) -> DataFrame:
+        print("Query being executed: ")
+        print(query)
+        conn = self.pgdb.conn
+        with conn.cursor() as curr:
+            curr.execute(query)
+            rows = curr.fetchall()
+            columns = [desc.name for desc in curr.description]
+        return DataFrame(rows, columns = columns)
+
+
     def close_connection(self) -> None:
         self.pgdb.close()
 

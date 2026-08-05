@@ -1,9 +1,12 @@
 import os
 from typing import Any
+from dotenv import load_dotenv
 
 import psycopg
 from psycopg import Connection, Cursor
 from sqlalchemy import create_engine
+
+load_dotenv()
 
 class PGConnection:
     def __init__(self, host: str,

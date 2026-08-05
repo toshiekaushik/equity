@@ -39,7 +39,7 @@ class MonthlyReturnsAcc(Accumulate):
         time_returns.setFormat("csv")
         time_returns.setToken(TIINGO_TOKEN)
         time_returns.setFreq("monthly")
-        time_returns.setStartDate("2026-01-01")
+        time_returns.setStartDate("2014-12-01")
         return time_returns
 
 

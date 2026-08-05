@@ -2,6 +2,6 @@ from data.collector.accumulators.time_returns.DailyReturnsAcc import DailyReturn
 from data.collector.accumulators.time_returns.MonthlyReturnsAcc import MonthlyReturnsAcc
 from data.collector.accumulators.time_returns.WeeklyReturnsAcc import WeeklyReturnsAcc
 
-acc = DailyReturnsAcc(tickers = ["AMD", "MSFT", "AMZN", "TSLA", "MU"])
+acc = MonthlyReturnsAcc(tickers = ["MSFT", "AMZN", "GOOG", "AAPL", "NFLX"])
 
 acc.execute()
