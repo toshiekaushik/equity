@@ -1,7 +1,6 @@
 from abc import abstractmethod, ABC
 
-class Alphas(ABC):
+class Signals(ABC):
 
     @abstractmethod
-    def execute(self):
-        pass
+    def execute(self): pass
