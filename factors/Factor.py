@@ -1,6 +1,6 @@
 from abc import abstractmethod, ABC
 
-class Signals(ABC):
+class Factors(ABC):
 
     @abstractmethod
     def execute(self):

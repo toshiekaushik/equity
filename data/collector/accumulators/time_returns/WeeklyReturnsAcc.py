@@ -39,5 +39,5 @@ class WeeklyReturnsAcc(Accumulate):
         weekly_returns.setFormat("csv")
         weekly_returns.setToken(API_KEY)
         weekly_returns.setFreq("weekly")
-        weekly_returns.setStartDate("2026-01-01")
+        weekly_returns.setStartDate("2014-01-01")
         return weekly_returns

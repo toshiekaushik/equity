@@ -1,6 +1,6 @@
-from Signal import Signals
+from Factor import Factors
 
-class SignalStage:
+class FactorStage:
 
     def __init__(self, config: list[dict]):
         self._signals = []
