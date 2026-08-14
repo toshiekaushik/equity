@@ -1,4 +1,3 @@
-from unittest.mock import inplace
 
 from pandas.core.interchange.dataframe_protocol import DataFrame
 

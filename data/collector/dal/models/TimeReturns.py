@@ -1,19 +1,20 @@
 import datetime
+import pandas as pd
+import pandera as pa
+from pandera.typing import DataFrame, Series
 
-class TimeReturns:
-    def __init__(self, ticker: str,
-                 date: datetime,
-                 open: float,
-                 high: float,
-                 low: float,
-                 close: float,
-                 volume: int):
-        self._date = date
-        self._open = open
-        self._high = high
-        self._low = low
-        self._close = close
-        self._volume = volume
+class TimeReturns(pa.DataFrameModel):
+    ticker: Series[str]
+    date: Series[datetime]
+    open: Series[float]
+    high: Series[float]
+    low: Series[float]
+    close: Series[float]
+    volume: Series[int]
+
+    class Config:
+        # Automatically coerce types if your DB returns mismatched data types (e.g. strings to datetimes)
+        coerce = True
 
     @property
     def date(self) -> datetime:

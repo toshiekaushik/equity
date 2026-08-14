@@ -1,3 +1,4 @@
+import datetime
 import os
 
 import pandas as pd
@@ -6,6 +7,7 @@ from sqlalchemy import create_engine
 
 from data.collector.dal.db.postgress.PGConnection import PGConnection
 from data.collector.dal.interfaces.TimeReturnsRepo import TimeReturnsRepo
+from data.collector.dal.models.TimeReturns import TimeReturns
 
 
 class TimeReturnsPG(TimeReturnsRepo):
@@ -79,6 +81,10 @@ class TimeReturnsPG(TimeReturnsRepo):
             columns = [desc.name for desc in curr.description]
         return DataFrame(rows, columns = columns)
 
+    def get_returns(self, startDate: datetime, endDate: datetime, ticker: str) -> DataFrame[TimeReturns]:
+        query = "SELECT ticker, date, open, high, low, close, volume FROM returns WHERE ticker = ? AND date BETWEEN ? AND ?"
+        raw_df = pd.read_sql(query, con = self.pgdb.conn, params = (ticker, startDate, endDate))
+        return DataFrame[TimeReturns](raw_df)
 
     def close_connection(self) -> None:
         self.pgdb.close()

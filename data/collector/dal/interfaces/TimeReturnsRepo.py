@@ -7,7 +7,7 @@ class TimeReturnsRepo():
     def add_returns(self, returns: TimeReturns):
         pass
 
-    def get_returns(self, startDate: datetime, endDate: datetime, ticker: str) -> TimeReturns:
+    def get_returns(self, startDate: datetime, endDate: datetime, ticker: str) -> DataFrame[TimeReturns]:
         pass
 
     def delete_stock_entries(self, startDate: datetime, endDate: datetime, ticker: str) -> None:
