@@ -23,6 +23,7 @@ class WeeklyReturnsAcc(Accumulate):
 
     def execute(self) -> None:
         dfs = []
+        print("Why is this being executed")
         for idx, ticker in enumerate(self.tickers):
             daily_returns_req = self.buildRequest(ticker)
             resp = daily_returns_req.getResponse()

@@ -15,7 +15,7 @@ class Momentum_Weekly(Factors):
     def execute(self) -> None:
         query = self.create_query()
         df = self.time_returns_pg.execute_query(query)
-        print("Monthly Returns DataFrame Head:\n", df.head())
+        print("Weekly Returns DataFrame Head:\n", df.head())
         df["pct_change"] = (
             df.groupby("ticker")["close"].pct_change()
         )

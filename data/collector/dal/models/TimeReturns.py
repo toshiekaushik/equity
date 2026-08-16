@@ -1,6 +1,6 @@
 import datetime
 import pandas as pd
-import pandera as pa
+import pandera.pandas as pa
 from pandera.typing import DataFrame, Series
 
 class TimeReturns(pa.DataFrameModel):
