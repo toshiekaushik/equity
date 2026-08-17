@@ -4,7 +4,6 @@ from pandas.core.interchange.dataframe_protocol import DataFrame
 from data.collector.dal.db.postgress.TimeReturnsPG import TimeReturnsPG
 from factors.Factor import Factors
 
-
 class Momentum_Weekly(Factors):
 
     def __init__(self, tickers: list[str], params = None):
