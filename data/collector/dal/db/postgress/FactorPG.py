@@ -39,3 +39,24 @@ class FactorPG(FactorRepo):
         )
 
         return raw_df
+
+    def get_reversal_weekly(
+            self,
+            startDate: datetime,
+            endDate: datetime,
+            tickers: list[str]
+    ) -> DataFrame:
+        query = """
+            SELECT ticker, date, reversal_chg
+            FROM weekly_reversal_factor
+            WHERE ticker = ANY(%s)
+              AND date BETWEEN %s AND %s
+        """
+
+        raw_df = pd.read_sql(
+            query,
+            con=self.pgdb.conn,
+            params=(tickers, startDate, endDate)
+        )
+
+        return raw_df
