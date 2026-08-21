@@ -60,3 +60,24 @@ class FactorPG(FactorRepo):
         )
 
         return raw_df
+
+    def get_volatility_20_days(
+            self,
+            startDate: datetime,
+            endDate: datetime,
+            tickers: list[str]
+    ) -> DataFrame:
+        query = """
+            SELECT ticker, date, volatility
+            FROM volatility_20_days
+            WHERE ticker = ANY(%s)
+              AND date BETWEEN %s AND %s
+        """
+
+        raw_df = pd.read_sql(
+            query,
+            con=self.pgdb.conn,
+            params=(tickers, startDate, endDate)
+        )
+
+        return raw_df

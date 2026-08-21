@@ -11,7 +11,7 @@ class Reversal_Weekly(Factors):
     def execute(self) -> None:
         returns = self.time_returns_pg.get_returns(
             "2014-01-01",
-            "2026-08-01",
+            "2026-08-17",
             self.tickers
         )
         print("Weekly Returns HEAD:\n", returns.head())

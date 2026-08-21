@@ -10,4 +10,7 @@ class FactorRepo():
     def get_reversal_weekly(self, startDate: datetime, endDate: datetime, tickers: str) -> DataFrame:
         pass
 
+    def get_volatility_20_days(self, startDate: datetime, endDate: datetime, tickers: str) -> DataFrame:
+        pass
+
     # def add_factor(self):

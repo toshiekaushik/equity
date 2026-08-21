@@ -13,6 +13,9 @@ class TimeReturnsRepo():
     def delete_stock_entries(self, startDate: datetime, endDate: datetime, ticker: str) -> None:
         pass
 
+    def get_daily_returns(self, startDate: datetime, endDate: datetime, tickers: list[str]):
+        pass
+
     def read_csv(self, path: str, table: str, cols):
         pass
 

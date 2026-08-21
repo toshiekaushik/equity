@@ -84,7 +84,65 @@ class TimeReturnsPG(TimeReturnsRepo):
         raw_df = pd.read_sql(query, con = self.pgdb.conn, params = (tickers, startDate, endDate))
         return raw_df
 
+    def get_returns_v2(self, startDate: datetime, endDate: datetime, tickers: list[str], table: str) -> DataFrame:
+        query = "SELECT ticker, date, open, high, low, close, volume FROM alpha_tester_v1 WHERE ticker = ANY(%s) AND date BETWEEN %s AND %s"
+        raw_df = pd.read_sql(query, con = self.pgdb.conn, params = (tickers, startDate, endDate))
+        return raw_df
+
+    def get_daily_returns(self, startDate: datetime, endDate: datetime, tickers: list[str]) -> DataFrame:
+        query = "SELECT ticker, date, open, high, low, close, volume FROM daily_returns WHERE ticker = ANY(%s) AND date BETWEEN %s AND %s"
+        raw_df = pd.read_sql(query, con=self.pgdb.conn, params=(tickers, startDate, endDate))
+        return raw_df
+
+    def upsert_df_columns(self, data: DataFrame, table_name: str) -> None:
+        conn, curr = self.pgdb.conn, self.pgdb.cursor
+
+        # 1. Ensure table exists first (if it doesn't, create it with all columns)
+        cols_def = []
+        for col in data.columns:
+            col_type = self.infer_pg_type(data[col].dtype)
+            cols_def.append(f'"{col}" {col_type}')
+
+        create_sql = f"""
+            CREATE TABLE IF NOT EXISTS {table_name} (
+                {",\n    ".join(cols_def)}
+            );
+        """
+        curr.execute(create_sql)
+        conn.commit()
+
+        # 2. Get existing columns from PostgreSQL database
+        curr.execute("""
+            SELECT column_name 
+            FROM information_schema.columns 
+            WHERE table_name = %s;
+        """, (table_name,))
+        existing_cols = {row[0] for row in curr.fetchall()}
+
+        # 3. Find columns in DataFrame that are missing from the SQL table
+        df_cols = set(data.columns)
+        missing_cols = df_cols - existing_cols
+
+        # 4. Alter the SQL table to add missing columns
+        for col in missing_cols:
+            col_type = self.infer_pg_type(data[col].dtype)
+            alter_sql = f'ALTER TABLE {table_name} ADD COLUMN "{col}" {col_type};'
+            curr.execute(alter_sql)
+            print(f"Added missing column to PostgreSQL: {col} ({col_type})")
+
+        conn.commit()
+
+        # 5. Push data to SQL (using append or your preferred method via pandas/SQLAlchemy)
+        engine = self.pgdb.getEngine()
+        data.to_sql(
+            table_name,
+            con=engine,
+            if_exists="append",
+            index=False
+        )
+
     def close_connection(self) -> None:
         self.pgdb.close()
+
 
 

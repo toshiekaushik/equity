@@ -5,5 +5,6 @@ from data.collector.accumulators.time_returns.WeeklyReturnsAcc import WeeklyRetu
 
 
 # acc = MonthlyReturnsAcc(tickers = ["MSFT", "AMZN", "GOOG", "AAPL", "NFLX"])
-acc = WeeklyReturnsAcc(tickers = TECH_TICKERS)
+# acc = WeeklyReturnsAcc(tickers = TECH_TICKERS)
+acc = DailyReturnsAcc(tickers = TECH_TICKERS)
 acc.execute()
