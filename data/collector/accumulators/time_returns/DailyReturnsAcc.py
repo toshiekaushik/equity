@@ -39,7 +39,7 @@ class DailyReturnsAcc(Accumulate):
         daily_returns.setTicker(ticker)
         daily_returns.setFormat("csv")
         daily_returns.setToken(TIINGO_TOKEN)
-        daily_returns.setStartDate("2022-01-01")
+        daily_returns.setStartDate("2026-01-01")
         return daily_returns
 
 

@@ -4,10 +4,13 @@ from data.collector.dal.db.postgress.TimeReturnsPG import TimeReturnsPG
 
 time_returns = TimeReturnsPG()
 factor_db = FactorPG()
-# returns = time_returns.get_returns("2026-08-10", "2026-08-15", TECH_TICKERS)
-momentum = factor_db.get_momentum_weekly("2026-08-10", "2026-08-15", TECH_TICKERS)
-reversal = factor_db.get_reversal_weekly("2026-08-10", "2026-08-15", TECH_TICKERS)
-volatility = factor_db.get_volatility_20_days("2026-08-10", "2026-08-15", TECH_TICKERS)
+momentum = factor_db.get_momentum_weekly("2026-08-23", "2026-08-29", TECH_TICKERS)
+reversal = factor_db.get_reversal_weekly("2026-08-23", "2026-08-29", TECH_TICKERS)
+volatility = factor_db.get_volatility_20_days("2026-08-23", "2026-08-29", TECH_TICKERS)
+# print(momentum)
+# print(volatility)
+# print(reversal)
+
 alpha_model = time_returns.execute_query(
     """
     select * from first_alpha_model where version = 'v2';
@@ -17,6 +20,7 @@ alpha_model = time_returns.execute_query(
 # 1. Merge momentum and reversal on ticker and date
 filtered_df = momentum.merge(reversal[["ticker", "date", "reversal_chg"]], on=["ticker", "date"], how="inner")
 filtered_df = filtered_df.merge(volatility[["ticker", "date", "volatility"]], on=["ticker", "date"], how="inner")
+# print(filtered_df)
 
 # 3. Extract scalar coefficients from alpha_model safely
 a_rev = alpha_model["reversal"].iloc[0]

@@ -56,7 +56,11 @@ class Momentum_Weekly(Factors):
                        .rolling(52)
                        .apply(lambda r: r.prod() - 1, raw=True))
         )
+
+        print("this is df head:\n", df.head())
+
         df.dropna(inplace = True)
+
         return df
 
     def create_query(self) -> str:

@@ -14,7 +14,7 @@ class Volatility_Calculation(Factors):
         # self.factor_pg = FactorPG()
 
     def execute(self) -> None:
-        returns = self.time_returns.get_daily_returns("2022-01-01", "2026-08-17", self.tickers)
+        returns = self.time_returns.get_daily_returns("2022-01-01", "2026-08-29", self.tickers)
         returns["pct_change"] = (
             returns["close"].pct_change()
         )
